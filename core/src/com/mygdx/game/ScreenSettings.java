@@ -13,7 +13,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 
 public class ScreenSettings implements Screen {
-    SunSpaceArcade sunSpaceArcade;
+    MyHorrorGame myHorrorGame;
     SpriteBatch batch;
     OrthographicCamera camera;
     Vector3 touch;
@@ -29,8 +29,8 @@ public class ScreenSettings implements Screen {
     InputKeyboard keyboard;
     boolean isKeyboardUse;
 
-    public ScreenSettings(SunSpaceArcade sunSpaceArcade) {
-        this.sunSpaceArcade = sunSpaceArcade;
+    public ScreenSettings(MyHorrorGame myHorrorGame) {
+        this.myHorrorGame = myHorrorGame;
         batch = sunSpaceArcade.batch;
         camera = sunSpaceArcade.camera;
         touch = sunSpaceArcade.touch;
@@ -90,13 +90,6 @@ public class ScreenSettings implements Screen {
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
         batch.draw(imgBackGround, 0, 0, SCR_WIDTH, SCR_HEIGHT);
-        fontLarge.draw(batch, btnName.text, btnName.x, btnName.y);
-        fontLarge.draw(batch, btnSound.text, btnSound.x, btnSound.y);
-        fontLarge.draw(batch, btnClearRecords.text, btnClearRecords.x, btnClearRecords.y);
-        fontLarge.draw(batch, btnBack.text, btnBack.x, btnBack.y);
-        if(isKeyboardUse){
-            keyboard.draw(batch);
-        }
         batch.end();
     }
 
@@ -127,16 +120,4 @@ public class ScreenSettings implements Screen {
         keyboard.dispose();
     }
 
-    private void saveSettings(){
-        Preferences prefs = Gdx.app.getPreferences("SunArcadeSettings");
-        prefs.putBoolean("sound", sunSpaceArcade.isSoundOn);
-        prefs.putString("name", sunSpaceArcade.playerName);
-        prefs.flush();
-    }
-
-    private void loadSettings(){
-        Preferences prefs = Gdx.app.getPreferences("SunArcadeSettings");
-        if(prefs.contains("sound")) sunSpaceArcade.isSoundOn = prefs.getBoolean("sound");
-        if(prefs.contains("name")) sunSpaceArcade.playerName = prefs.getString("name");
-    }
 }

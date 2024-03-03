@@ -12,7 +12,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 
 public class ScreenMenu implements Screen {
-    SunSpaceArcade sunSpaceArcade;
+    MyHorrorGame myHorrorGame;
     SpriteBatch batch;
     OrthographicCamera camera;
     Vector3 touch;
@@ -25,12 +25,12 @@ public class ScreenMenu implements Screen {
     SpaceButton btnAbout;
     SpaceButton btnExit;
 
-    public ScreenMenu(SunSpaceArcade sunSpaceArcade) {
-        this.sunSpaceArcade = sunSpaceArcade;
-        batch = sunSpaceArcade.batch;
-        camera = sunSpaceArcade.camera;
-        touch = sunSpaceArcade.touch;
-        font = sunSpaceArcade.fontLarge;
+    public ScreenMenu(MyHorrorGame myHorrorGame) {
+        this.myHorrorGame = myHorrorGame;
+        batch = myHorrorGame.batch;
+        touch = myHorrorGame.touch;
+        camera = myHorrorGame.camera;
+        font = myHorrorGame;
 
         imgBackGround = new Texture("space0.png");
 

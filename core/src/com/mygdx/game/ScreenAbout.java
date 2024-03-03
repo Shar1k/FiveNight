@@ -1,7 +1,6 @@
 package com.mygdx.game;
 
-import static com.mygdx.sunspacearcade.SunSpaceArcade.SCR_HEIGHT;
-import static com.mygdx.sunspacearcade.SunSpaceArcade.SCR_WIDTH;
+
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -12,7 +11,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 
 public class ScreenAbout implements Screen {
-    SunSpaceArcade sunSpaceArcade;
+    MyHorrorGame myHorrorGame;
     SpriteBatch batch;
     OrthographicCamera camera;
     Vector3 touch;
@@ -25,12 +24,12 @@ public class ScreenAbout implements Screen {
             "В неё можно играть.\n"+
             "А можно не играть";
 
-    public ScreenAbout(SunSpaceArcade sunSpaceArcade) {
-        this.sunSpaceArcade = sunSpaceArcade;
-        batch = sunSpaceArcade.batch;
-        camera = sunSpaceArcade.camera;
-        touch = sunSpaceArcade.touch;
-        font = sunSpaceArcade.fontLarge;
+    public ScreenAbout(MyHorrorGame myHorrorGame) {
+        this.myHorrorGame = myHorrorGame;
+        batch = myHorrorGame.batch;
+        touch = myHorrorGame.touch;
+        camera = myHorrorGame.camera;
+        font = tmyHorrorGame;
 
         imgBackGround = new Texture("space2.png");
 
@@ -47,7 +46,7 @@ public class ScreenAbout implements Screen {
         // касания
         if(Gdx.input.justTouched()){
             touch.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-            camera.unproject(touch);
+            myHorrorGame.unproject(touch);
 
             if(btnBack.hit(touch.x, touch.y)){
                 sunSpaceArcade.setScreen(sunSpaceArcade.screenMenu);
@@ -57,7 +56,7 @@ public class ScreenAbout implements Screen {
         // события
 
         // отрисовка
-        batch.setProjectionMatrix(camera.combined);
+        batch.setProjectionMatrix(myHorrorGame.combined);
         batch.begin();
         batch.draw(imgBackGround, 0, 0, SCR_WIDTH, SCR_HEIGHT);
         font.draw(batch, textAbout, 100, 1200);

@@ -1,23 +1,14 @@
 package com.mygdx.game;
 
-import static com.mygdx.sunspacearcade.SunSpaceArcade.SCR_HEIGHT;
-import static com.mygdx.sunspacearcade.SunSpaceArcade.SCR_WIDTH;
-import static com.mygdx.sunspacearcade.SunSpaceArcade.TYPE_SHIP;
-
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.TimeUtils;
 
 public class ScreenCamera implements Screen {
     SpriteBatch batch;

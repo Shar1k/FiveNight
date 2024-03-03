@@ -1,8 +1,7 @@
 package com.mygdx.game;
 
-import static com.mygdx.sunspacearcade.SunSpaceArcade.SCR_HEIGHT;
-import static com.mygdx.sunspacearcade.SunSpaceArcade.SCR_WIDTH;
-import static com.mygdx.sunspacearcade.SunSpaceArcade.TYPE_SHIP;
+
+
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;

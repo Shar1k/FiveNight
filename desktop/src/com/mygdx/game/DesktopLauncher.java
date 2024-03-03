@@ -9,7 +9,7 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setForegroundFPS(60);
-		config.setTitle("FiveFight");
+		config.setTitle("FiveMight");
 		new Lwjgl3Application(new MyHorrorGame(), config);
 	}
 }

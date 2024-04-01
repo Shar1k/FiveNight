@@ -1,7 +1,5 @@
 package com.mygdx.game;
 
-import static com.mygdx.sunspacearcade.SunSpaceArcade.SCR_HEIGHT;
-import static com.mygdx.sunspacearcade.SunSpaceArcade.SCR_WIDTH;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
@@ -11,41 +9,21 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
+import static com.mygdx.game.MyHorrorGame.*;
 
 public class ScreenSettings implements Screen {
     MyHorrorGame myHorrorGame;
     SpriteBatch batch;
     OrthographicCamera camera;
     Vector3 touch;
-    BitmapFont fontLarge, fontSmall;
-
-    Texture imgBackGround;
-
-    SpaceButton btnName;
-    SpaceButton btnSound;
-    SpaceButton btnClearRecords;
-    SpaceButton btnBack;
-
-    InputKeyboard keyboard;
-    boolean isKeyboardUse;
 
     public ScreenSettings(MyHorrorGame myHorrorGame) {
         this.myHorrorGame = myHorrorGame;
-        batch = sunSpaceArcade.batch;
-        camera = sunSpaceArcade.camera;
-        touch = sunSpaceArcade.touch;
-        fontLarge = sunSpaceArcade.fontLarge;
-        fontSmall = sunSpaceArcade.fontSmall;
+        batch = myHorrorGame.batch;
+        camera = myHorrorGame.camera;
+        touch = myHorrorGame.touch;
 
-        imgBackGround = new Texture("space3.png");
 
-        loadSettings();
-        btnName = new SpaceButton("Name: "+sunSpaceArcade.playerName, 100, 1000, fontLarge);
-        btnSound = new SpaceButton(sunSpaceArcade.isSoundOn ? "Sound ON" : "Sound OFF", 100, 850, fontLarge);
-        btnClearRecords = new SpaceButton("Clear Records", 100, 700, fontLarge);
-        btnBack = new SpaceButton("Back", 100, 550, fontLarge);
-
-        keyboard = new InputKeyboard(fontSmall, SCR_WIDTH, SCR_HEIGHT/2, 8);
     }
 
     @Override
@@ -60,28 +38,6 @@ public class ScreenSettings implements Screen {
             touch.set(Gdx.input.getX(), Gdx.input.getY(), 0);
             camera.unproject(touch);
 
-            if(isKeyboardUse){
-                if (keyboard.endOfEdit(touch.x, touch.y)) {
-                    sunSpaceArcade.playerName = keyboard.getText();
-                    isKeyboardUse = false;
-                    btnName.setText("Name: "+sunSpaceArcade.playerName);
-                }
-            } else {
-                if (btnName.hit(touch.x, touch.y)) {
-                    isKeyboardUse = true;
-                }
-                if (btnSound.hit(touch.x, touch.y)) {
-                    sunSpaceArcade.isSoundOn = !sunSpaceArcade.isSoundOn;
-                    btnSound.setText(sunSpaceArcade.isSoundOn ? "Sound ON" : "Sound OFF");
-                }
-                if (btnClearRecords.hit(touch.x, touch.y)) {
-                    sunSpaceArcade.screenGame.clearRecords();
-                    btnClearRecords.setText("Records Cleared");
-                }
-                if (btnBack.hit(touch.x, touch.y)) {
-                    sunSpaceArcade.setScreen(sunSpaceArcade.screenMenu);
-                }
-            }
         }
 
         // события
@@ -89,7 +45,6 @@ public class ScreenSettings implements Screen {
         // отрисовка
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
-        batch.draw(imgBackGround, 0, 0, SCR_WIDTH, SCR_HEIGHT);
         batch.end();
     }
 
@@ -110,14 +65,13 @@ public class ScreenSettings implements Screen {
 
     @Override
     public void hide() {
-        btnClearRecords.setText("Clear Records");
-        saveSettings();
+
     }
 
     @Override
     public void dispose() {
-        imgBackGround.dispose();
-        keyboard.dispose();
+
+
     }
 
 }

@@ -4,10 +4,10 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
+import static com.mygdx.game.MyHorrorGame.*;
 
 public class ScreenMenu implements Screen {
     MyHorrorGame myHorrorGame;
@@ -16,26 +16,25 @@ public class ScreenMenu implements Screen {
     Vector3 touch;
     BitmapFont font;
 
-    Texture imgBackGround;
 
-    SpaceButton btnPlay;
-    SpaceButton btnSettings;
-    SpaceButton btnAbout;
-    SpaceButton btnExit;
+    Button btnPlay;
+    Button btnSettings;
+    Button btnAbout;
+    Button btnExit;
 
     public ScreenMenu(MyHorrorGame myHorrorGame) {
         this.myHorrorGame = myHorrorGame;
         batch = myHorrorGame.batch;
         touch = myHorrorGame.touch;
         camera = myHorrorGame.camera;
-        font = myHorrorGame;
+        font = myHorrorGame.font;
 
-        imgBackGround = new Texture("space0.png");
 
-        btnPlay = new SpaceButton("Play", 100, 1100, font);
-        btnSettings = new SpaceButton("Settings", 100, 950, font);
-        btnAbout = new SpaceButton("About Game", 100, 800, font);
-        btnExit = new SpaceButton("Exit", 100, 650, font);
+
+        btnPlay = new Button("Play", 100, 700, font);
+        btnSettings = new Button("Settings", 100, 600, font);
+        btnAbout = new Button("About Game", 100, 500, font);
+        btnExit = new Button("Exit", 100, 400, font);
     }
 
     @Override
@@ -50,16 +49,16 @@ public class ScreenMenu implements Screen {
             touch.set(Gdx.input.getX(), Gdx.input.getY(), 0);
             camera.unproject(touch);
 
-            if(btnPlay.hit(touch.x, touch.y)){
-                sunSpaceArcade.setScreen(sunSpaceArcade.screenGame);
+            if(btnPlay.hitButton(touch.x, touch.y)){
+                myHorrorGame.setScreen(myHorrorGame.screenGame);
             }
-            if(btnSettings.hit(touch.x, touch.y)){
-                sunSpaceArcade.setScreen(sunSpaceArcade.screenSettings);
+            if(btnSettings.hitButton(touch.x, touch.y)){
+                myHorrorGame.setScreen(myHorrorGame.screenSettings);
             }
-            if(btnAbout.hit(touch.x, touch.y)){
-                sunSpaceArcade.setScreen(sunSpaceArcade.screenAbout);
+            if(btnAbout.hitButton(touch.x, touch.y)){
+                myHorrorGame.setScreen(myHorrorGame.screenAbout);
             }
-            if(btnExit.hit(touch.x, touch.y)){
+            if(btnExit.hitButton(touch.x, touch.y)){
                 Gdx.app.exit();
             }
         }
@@ -69,7 +68,6 @@ public class ScreenMenu implements Screen {
         // отрисовка
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
-        batch.draw(imgBackGround, 0, 0, SCR_WIDTH, SCR_HEIGHT);
         font.draw(batch, btnPlay.text, btnPlay.x, btnPlay.y);
         font.draw(batch, btnSettings.text, btnSettings.x, btnSettings.y);
         font.draw(batch, btnAbout.text, btnAbout.x, btnAbout.y);
@@ -99,6 +97,6 @@ public class ScreenMenu implements Screen {
 
     @Override
     public void dispose() {
-        imgBackGround.dispose();
+
     }
 }

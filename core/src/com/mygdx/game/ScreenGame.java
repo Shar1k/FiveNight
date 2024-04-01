@@ -6,30 +6,21 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.TimeUtils;
+
 
 public class ScreenGame implements Screen {
     MyHorrorGame myHorrorGame;
     SpriteBatch batch;
     OrthographicCamera camera;
     Vector3 touch;
-    BitmapFont fontLarge, fontSmall;
-
-    Texture imgBackGround;
+    BitmapFont font;
 
 
-    SpaceButton btnBack;
-
+    Button btnBack;
 
     boolean isGameOver;
     int kills;
@@ -39,12 +30,10 @@ public class ScreenGame implements Screen {
         batch = myHorrorGame.batch;
         touch = myHorrorGame.touch;
         camera = myHorrorGame.camera;
-        font = tmyHorrorGame;
+        font = myHorrorGame.font;
 
 
-        imgBackGround = new Texture("space1.png");
-
-
+        btnBack = new Button("Back", 100, 650, font);
     }
 
     @Override
@@ -98,17 +87,13 @@ public class ScreenGame implements Screen {
 
     @Override
     public void dispose() {
-        imgBackGround.dispose();
-        imgShipsAtlas.dispose();
-        imgShot.dispose();
+
     }
 
 
 
     private void gameOver(){
         isGameOver = true;
-        players[players.length-1].name = sunSpaceArcade.playerName;
-        players[players.length-1].score = kills;
         sortRecords();
         saveRecords();
     }
@@ -116,51 +101,28 @@ public class ScreenGame implements Screen {
     private void gameStart(){
         isGameOver = false;
         kills = 0;
-        enemies.clear();
-        shots.clear();
-        fragments.clear();
-        respawnShip();
-        ship.lives = nShipLives;
+
     }
 
 
 
     private void sortRecords(){
         boolean flag = true;
-        while (flag){
-            flag = false;
-            for (int i = 0; i < players.length-1; i++) {
-                if(players[i].score<players[i+1].score){
-                    Player c = players[i];
-                    players[i] = players[i+1];
-                    players[i+1] = c;
-                    flag = true;
-                }
-            }
-        }
+
     }
 
     private void saveRecords(){
-        Preferences prefs = Gdx.app.getPreferences("SunArcadeRecords");
-        for (int i = 0; i < players.length; i++) {
-            prefs.putString("name"+i, players[i].name);
-            prefs.putInteger("score"+i, players[i].score);
-        }
+        Preferences prefs = Gdx.app.getPreferences("");
+
         prefs.flush();
     }
 
     private void loadRecords(){
-        Preferences prefs = Gdx.app.getPreferences("SunArcadeRecords");
-        for (int i = 0; i < players.length; i++) {
-            if(prefs.contains("name"+i)) players[i].name = prefs.getString("name"+i);
-            if(prefs.contains("score"+i)) players[i].score = prefs.getInteger("score"+i);
-        }
+        Preferences prefs = Gdx.app.getPreferences("");
+
     }
 
     public void clearRecords(){
-        for (int i = 0; i < players.length; i++) {
-            players[i].name = "Noname";
-            players[i].score = 0;
-        }
+
     }
 }

@@ -14,16 +14,9 @@ public class ScreenCamera implements Screen {
     SpriteBatch batch;
     OrthographicCamera camera;
     Vector3 touch;
-    BitmapFont fontLarge, fontSmall;
 
-    Texture imgBackGround;
-    Texture imgShipsAtlas;
-    //TextureRegion[] imgShip = new TextureRegion[12];
-    TextureRegion[][] imgShip = new TextureRegion[5][12];
-    TextureRegion[][] imgFragment = new TextureRegion[5][16];
-    Texture imgShot;
-    Sound sndShot;
-    Sound sndExplosion;
+
+
 
 
     @Override
@@ -69,9 +62,7 @@ public class ScreenCamera implements Screen {
 
     @Override
     public void dispose() {
-        imgBackGround.dispose();
-        imgShipsAtlas.dispose();
-        imgShot.dispose();
+
     }
 }
 

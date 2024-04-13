@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.ScreenUtils;
+
 import static com.mygdx.game.MyHorrorGame.*;
 
 public class ScreenMenu implements Screen {
@@ -44,6 +46,7 @@ public class ScreenMenu implements Screen {
 
     @Override
     public void render(float delta) {
+        ScreenUtils.clear(1, 0, 0, 1);
         // касания
         if(Gdx.input.justTouched()){
             touch.set(Gdx.input.getX(), Gdx.input.getY(), 0);

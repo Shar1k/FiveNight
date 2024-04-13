@@ -38,12 +38,7 @@ public class ScreenGame implements Screen {
 
     @Override
     public void show() {
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-        }
-        touch.set(0, 0, 0);
-        gameStart();
+
     }
 
     @Override
